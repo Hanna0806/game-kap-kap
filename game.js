@@ -8,7 +8,7 @@ btnPlay.addEventListener('click', appearsGame);
 function appearsGame() {
     homePage.style.display = 'none';
     gamePage.style.display = 'block';
-    // createCircle();
+    createCircle();
     outCalk.focus();
 }
 
@@ -56,7 +56,34 @@ outCalk.addEventListener('keypress', function (event) {
 })
 
 
-
+const operations = {
+    sum: '+',
+    subtract: '-',
+    // multiply: '*',
+    // divide: '/',
+  };
+  
+  //функция рандомное число1
+  function getRandomNumber(min = 1, max = 11) {
+    const number1 = Math.floor(Math.random() * (max - min) + min);
+    return number1
+  }
+  
+  
+  //функция рандомный знак + , -
+  function getRandomSign(min = 1, max = 3) {
+    const sign = Math.floor(Math.random() * (max - min) + min);
+    return sign === 1 ? '+' : '-'
+  }
+  console.log(getRandomNumber());
+  console.log(getRandomSign());
+  
+  //функция рандомное число2
+  function getRandomNumber2(min = 1, max = 11) {
+    const number2 = Math.floor(Math.random() * (max - min) + min);
+    return number2
+  }
+  console.log(getRandomNumber2());
 
 //рандомная капля
 const pageGame = document.querySelector('.game-page');
@@ -66,7 +93,7 @@ function createCircle() {
     circle.innerHTML = getRandomNumber() + getRandomSign() + getRandomNumber2();
     circle.classList.add("circle");
     console.log(circle)
-
+    
     pageGame.append(circle);
 }
 
