@@ -29,7 +29,7 @@
             .img-star {
                 width: 20px;
                 height: 20px;
-
+                transition: transform .5s ease;
             }
 
             &:hover {
@@ -38,7 +38,6 @@
                 .img-star {
                     -webkit-transform: rotate(-50deg);
                     transform: rotate(-50deg);
-                    tansition: all .5s linear;
                 }
             }
         }

@@ -47,12 +47,6 @@ numberCalk.forEach(function (number) {
     }
 })
 
-// прописываем цифры с клавиатуры
-// outCalk.addEventListener('keypress', function (event) {
-//     outCalk.value = event.key;
-// })
-
-
 
 //функция рандом
 function getRandomInt(min, max) {
@@ -99,37 +93,70 @@ function createCircle() {
     pageGame.append(circle);
 }
 
+
+
 const score = document.querySelector('.score');      // счетчик
 console.log(score);
 const enterCalk = document.querySelector('.enter');  // кнопка enter
 console.log(enterCalk);
 
-
 // функция проверяет введенное значение
 // outCalk.addEventListener('input', function () {
-
 // });
 
-enterCalk.addEventListener('click', function () {
+let count = 0;
+function checkResult() {
     const trueResult = currentTask.sign === '-' ? currentTask.number1 - currentTask.number2 : currentTask.number1 + currentTask.number2;
     console.log(trueResult)
     console.log(outCalk.value)
     if (outCalk.value == trueResult) {
         const circle = document.querySelector('.circle');
         circle.remove();
-        score.textContent = +score.textContent + 10;
+        count++;
+        score.textContent = +score.textContent + 10 + count;
         clearAll()
         createCircle()
         outCalk.focus();
+        console.log(count);
     } else {
         score.textContent = +score.textContent - 10;
         outCalk.focus();
     }
+}
+
+enterCalk.addEventListener('click', checkResult)
+
+// нажатие enter с клавиатуры 
+outCalk.addEventListener("keyup", function (e) {
+    let key = e.keyCode;
+    if (key === 13) {
+        checkResult()
+    }
 })
 
+const waves = document.querySelector('.waves')
+const wave1 = document.querySelector('.wave1')
+// вода поднимается
+// count2 = 0;
 
+function waterUp() {
+    const circle = document.querySelector('.circle');
 
+    if (circle) {        
+        const positionCircle = circle.getBoundingClientRect();
+        const positionWave = wave1.getBoundingClientRect();
 
+        console.log(positionCircle)
+        console.log(positionWave)
+        if (positionCircle.y + positionCircle.height >= positionWave.y) {
+            waves.style.height = positionWave.height + 40 + 'px';
+            wave1.style.height = positionWave.height + 40 + 'px';
+            circle.remove();
+            createCircle()
+        }
+    }
+}
 
+setInterval(waterUp, 100);
 
 

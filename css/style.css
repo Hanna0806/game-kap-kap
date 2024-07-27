@@ -25,6 +25,7 @@
 .home-page__container .btn .img-star {
   width: 20px;
   height: 20px;
+  transition: transform 0.5s ease;
 }
 .home-page__container .btn:hover {
   filter: saturate(2);
@@ -32,7 +33,6 @@
 .home-page__container .btn:hover .img-star {
   -webkit-transform: rotate(-50deg);
   transform: rotate(-50deg);
-  tansition: all 0.5s linear;
 }
 .home-page__container .rules__btn {
   background-color: rgb(72, 0, 255);
