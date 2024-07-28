@@ -86,7 +86,13 @@ function createCircle() {
     currentTask.number1 = getRandomNumber();
     currentTask.sign = getRandomSign();
     currentTask.number2 = getRandomNumber2();
-    circle.innerHTML = currentTask.number1 + currentTask.sign + currentTask.number2;
+
+    if(currentTask.sign === '-' && currentTask.number2 > currentTask.number1) {
+        circle.innerHTML = currentTask.number2 + currentTask.sign + currentTask.number1;
+    } else {
+        circle.innerHTML = currentTask.number1 + currentTask.sign + currentTask.number2;
+    }
+
     const randomX = getRandomInt(0, 90);
     circle.style.left = randomX + "%";
 
@@ -101,12 +107,20 @@ const enterCalk = document.querySelector('.enter');  // кнопка enter
 console.log(enterCalk);
 
 // функция проверяет введенное значение
-// outCalk.addEventListener('input', function () {
-// });
-
 let count = 0;
 function checkResult() {
-    const trueResult = currentTask.sign === '-' ? currentTask.number1 - currentTask.number2 : currentTask.number1 + currentTask.number2;
+
+let trueResult = 0;
+if(currentTask.sign === '+') {
+    trueResult = currentTask.number1 + currentTask.number2
+}
+if(currentTask.sign === '-') {
+    if(currentTask.number2 > currentTask.number1) {
+        trueResult = currentTask.number2 - currentTask.number1
+    } else {
+        trueResult = currentTask.number1 - currentTask.number2
+    }
+}
     console.log(trueResult)
     console.log(outCalk.value)
     if (outCalk.value == trueResult) {
@@ -124,6 +138,7 @@ function checkResult() {
     }
 }
 
+
 enterCalk.addEventListener('click', checkResult)
 
 // нажатие enter с клавиатуры 
@@ -138,25 +153,30 @@ const waves = document.querySelector('.waves')
 const wave1 = document.querySelector('.wave1')
 // вода поднимается
 // count2 = 0;
-
 function waterUp() {
     const circle = document.querySelector('.circle');
 
     if (circle) {        
         const positionCircle = circle.getBoundingClientRect();
         const positionWave = wave1.getBoundingClientRect();
-
-        console.log(positionCircle)
-        console.log(positionWave)
+       
+        // console.log(positionCircle)
+        // console.log(positionWave)
         if (positionCircle.y + positionCircle.height >= positionWave.y) {
             waves.style.height = positionWave.height + 40 + 'px';
             wave1.style.height = positionWave.height + 40 + 'px';
             circle.remove();
             createCircle()
         }
+        if(waves.style.height == '230px') {
+            console.log ('230px')
+        }
     }
 }
-
 setInterval(waterUp, 100);
+
+// function gameOver () {
+    
+// }
 
 
