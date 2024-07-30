@@ -98,9 +98,9 @@
             align-items: center;
             gap: 4px;
         }
-        .game-counter {
+        // .game-counter {
             
-        }
+        // }
 
         .star-game {
             height: 24px;
@@ -193,7 +193,7 @@
     text-align: center;
     font-weight: $text-weight;
     font-size: 1.6rem;
-    animation: kaply 15s ease infinite;
+    animation: kaply 5s ease infinite;
   }
 
 @keyframes kaply {
