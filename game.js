@@ -87,7 +87,7 @@ function createCircle() {
     currentTask.sign = getRandomSign();
     currentTask.number2 = getRandomNumber2();
 
-    if(currentTask.sign === '-' && currentTask.number2 > currentTask.number1) {
+    if (currentTask.sign === '-' && currentTask.number2 > currentTask.number1) {
         circle.innerHTML = currentTask.number2 + currentTask.sign + currentTask.number1;
     } else {
         circle.innerHTML = currentTask.number1 + currentTask.sign + currentTask.number2;
@@ -108,32 +108,39 @@ console.log(enterCalk);
 
 // функция проверяет введенное значение
 let count = 0;
+let trueResultCount = 0;   // счетчик на правильные ответы
+let trueResult = 0;
+let wrongResultCount = 0;  // счетчик на неправильные ответы
+
 function checkResult() {
 
-let trueResult = 0;
-if(currentTask.sign === '+') {
-    trueResult = currentTask.number1 + currentTask.number2
-}
-if(currentTask.sign === '-') {
-    if(currentTask.number2 > currentTask.number1) {
-        trueResult = currentTask.number2 - currentTask.number1
-    } else {
-        trueResult = currentTask.number1 - currentTask.number2
+    let trueResult = 0;
+    if (currentTask.sign === '+') {
+        trueResult = currentTask.number1 + currentTask.number2
     }
-}
+    if (currentTask.sign === '-') {
+        if (currentTask.number2 > currentTask.number1) {
+            trueResult = currentTask.number2 - currentTask.number1
+        } else {
+            trueResult = currentTask.number1 - currentTask.number2
+        }
+    }
     console.log(trueResult)
     console.log(outCalk.value)
     if (outCalk.value == trueResult) {
         const circle = document.querySelector('.circle');
         circle.remove();
-        count++;
         score.textContent = +score.textContent + 10 + count;
+        count++;
+        trueResultCount++;
+        console.log(trueResultCount)
         clearAll()
         createCircle()
         outCalk.focus();
         console.log(count);
     } else {
-        score.textContent = +score.textContent - 10;
+        score.textContent = +score.textContent - 10 - count;
+        wrongResultCount++;
         outCalk.focus();
     }
 }
@@ -152,14 +159,13 @@ outCalk.addEventListener("keyup", function (e) {
 const waves = document.querySelector('.waves')
 const wave1 = document.querySelector('.wave1')
 // вода поднимается
-// count2 = 0;
 function waterUp() {
     const circle = document.querySelector('.circle');
 
-    if (circle) {        
+    if (circle) {
         const positionCircle = circle.getBoundingClientRect();
         const positionWave = wave1.getBoundingClientRect();
-       
+
         // console.log(positionCircle)
         // console.log(positionWave)
         if (positionCircle.y + positionCircle.height >= positionWave.y) {
@@ -168,15 +174,25 @@ function waterUp() {
             circle.remove();
             createCircle()
         }
-        if(waves.style.height == '230px') {
-            console.log ('230px')
+        if (waves.style.height == '230px') {
+            gameOver()
         }
     }
 }
 setInterval(waterUp, 100);
 
-// function gameOver () {
-    
-// }
+const gameOverGame = document.querySelector('.game-over-page');
+const rightAnswer = document.querySelector('.right-answer');
+const wrongAnswer = document.querySelector('.wrong-answer');
+const scoreGame = document.querySelector('.game-score');
+console.log(gameOverGame)
+
+function gameOver() {
+    gamePage.style.display = 'none';
+    gameOverGame.style.display = 'flex';
+    rightAnswer.textContent = rightAnswer.textContent + trueResultCount;
+    wrongAnswer.textContent = wrongAnswer.textContent + wrongResultCount;
+    scoreGame.textContent += score.textContent;
+}
 
 
