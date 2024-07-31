@@ -55,20 +55,26 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // Максимум не включается, минимум включается
 }
 
-function getRandomNumber() {
-    return number1 = getRandomInt(1, 11)
-}
-
 //функция рандомный знак + , -
-function getRandomSign(min = 1, max = 3) {
-    const sign = Math.floor(Math.random() * (max - min) + min);
-    return sign === 1 ? '+' : '-'
-}
+function getRandomSign(min, max) {
+    const number = Math.floor(Math.random() * (max - min) + min);
 
-//функция рандомное число2
+    if (number === 1) {
+        return '+'
+    }
+    if (number === 2) {
+        return '-'
+    }
+    if (number === 3) {
+        return '*'
+    }
+    if (number === 4) {
+        return '/'
+    }
 
-function getRandomNumber2() {
-    return number2 = getRandomInt(1, 11)
+
+
+
 }
 
 //рандомная капля
@@ -83,13 +89,25 @@ const currentTask = {
 function createCircle() {
     const circle = document.createElement("div");
     circle.classList.add("circle");
-    currentTask.number1 = getRandomNumber();
-    currentTask.sign = getRandomSign();
-    currentTask.number2 = getRandomNumber2();
+    if (score.textContent < 30) {
+        currentTask.sign = getRandomSign(1, 3)
+    } else {
+        currentTask.sign = getRandomSign(1, 5)
+    }
 
-    if (currentTask.sign === '-' && currentTask.number2 > currentTask.number1) {
+    // создаем 1-ое и 2-ое число
+    currentTask.number1 = getRandomInt(1, 11);
+    currentTask.number2 = getRandomInt(1, 11);
+
+    if ((currentTask.sign === '-' || currentTask.sign === '/') && currentTask.number2 > currentTask.number1) {
+        while (currentTask.number2 % currentTask.number1 !== 0) {
+            currentTask.number1--;
+        }
         circle.innerHTML = currentTask.number2 + currentTask.sign + currentTask.number1;
     } else {
+        while (currentTask.number1 % currentTask.number2 !== 0) {
+            currentTask.number2--;
+        }
         circle.innerHTML = currentTask.number1 + currentTask.sign + currentTask.number2;
     }
 
@@ -118,6 +136,7 @@ function checkResult() {
     if (currentTask.sign === '+') {
         trueResult = currentTask.number1 + currentTask.number2
     }
+
     if (currentTask.sign === '-') {
         if (currentTask.number2 > currentTask.number1) {
             trueResult = currentTask.number2 - currentTask.number1
@@ -125,6 +144,20 @@ function checkResult() {
             trueResult = currentTask.number1 - currentTask.number2
         }
     }
+
+    if (currentTask.sign === '*') {
+        trueResult = currentTask.number1 * currentTask.number2
+    }
+
+    if (currentTask.sign === '/') {
+        if (currentTask.number2 > currentTask.number1) {
+            trueResult = currentTask.number2 / currentTask.number1
+        } else {
+            trueResult = currentTask.number1 / currentTask.number2
+        }
+    }
+
+
     console.log(trueResult)
     console.log(outCalk.value)
     if (outCalk.value == trueResult) {
