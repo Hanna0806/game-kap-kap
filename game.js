@@ -2,13 +2,19 @@ const homePage = document.querySelector('.home-page');
 const gamePage = document.querySelector('.game-page');
 const btnPlay = document.querySelector('.play__btn');
 const outCalk = document.querySelector('.input-calk'); // экран
+const audioSea = document.querySelector('.audio-sea');
+const audioKap = document.querySelector('.audio-kap');
+
 
 btnPlay.addEventListener('click', appearsGame);
+
 
 function appearsGame() {
     homePage.style.display = 'none';
     gamePage.style.display = 'block';
     createCircle();
+    // playMusicSea()
+    audioSea.play();
     outCalk.focus();
 }
 
@@ -71,10 +77,6 @@ function getRandomSign(min, max) {
     if (number === 4) {
         return '/'
     }
-
-
-
-
 }
 
 //рандомная капля
@@ -86,13 +88,20 @@ const currentTask = {
     number2: '',
 }
 
+let count = 0;
 function createCircle() {
     const circle = document.createElement("div");
     circle.classList.add("circle");
     if (score.textContent < 30) {
         currentTask.sign = getRandomSign(1, 3)
     } else {
-        currentTask.sign = getRandomSign(1, 5)
+        currentTask.sign = getRandomSign(1, 5);
+    }
+    if (count > 20) {
+        circle.style.animation = 'kaply 15s ease infinite'
+    }
+    if (count > 40) {
+        circle.style.animation = 'kaply 8s ease infinite'
     }
 
     // создаем 1-ое и 2-ое число
@@ -125,7 +134,7 @@ const enterCalk = document.querySelector('.enter');  // кнопка enter
 console.log(enterCalk);
 
 // функция проверяет введенное значение
-let count = 0;
+// let count = 0;
 let trueResultCount = 0;   // счетчик на правильные ответы
 let trueResult = 0;
 let wrongResultCount = 0;  // счетчик на неправильные ответы
@@ -161,6 +170,7 @@ function checkResult() {
     console.log(trueResult)
     console.log(outCalk.value)
     if (outCalk.value == trueResult) {
+        audioKap.play()
         const circle = document.querySelector('.circle');
         circle.remove();
         score.textContent = +score.textContent + 10 + count;
@@ -226,6 +236,7 @@ function gameOver() {
     rightAnswer.textContent = rightAnswer.textContent + trueResultCount;
     wrongAnswer.textContent = wrongAnswer.textContent + wrongResultCount;
     scoreGame.textContent += score.textContent;
+    audioSea.pause();
 }
 
 
