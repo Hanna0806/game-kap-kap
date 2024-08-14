@@ -4,6 +4,10 @@ const btnPlay = document.querySelector('.play__btn');
 const outCalk = document.querySelector('.input-calk'); // экран
 const audioSea = document.querySelector('.audio-sea');
 const audioKap = document.querySelector('.audio-kap');
+const audioMistake = document.querySelector('.audio-mistake');
+const audioWaveUp = document.querySelector('.audio-vawe-up');
+
+
 
 
 btnPlay.addEventListener('click', appearsGame);
@@ -101,7 +105,7 @@ function createCircle() {
         circle.style.animation = 'kaply 15s ease infinite'
     }
     if (count > 40) {
-        circle.style.animation = 'kaply 8s ease infinite'
+        circle.style.animation = 'kaply 8s ease infinite';
     }
 
     // создаем 1-ое и 2-ое число
@@ -182,10 +186,17 @@ function checkResult() {
         outCalk.focus();
         console.log(count);
     } else {
-        score.textContent = +score.textContent - 10 - count;
+        if (+score.textContent - 10 - count > 0) {
+            score.textContent = +score.textContent - 10 - count;
+        } else {
+            score.textContent = 0
+        }
         wrongResultCount++;
         outCalk.focus();
+        audioMistake.play();
+        clearAll()
     }
+
 }
 
 
@@ -216,13 +227,18 @@ function waterUp() {
             wave1.style.height = positionWave.height + 40 + 'px';
             circle.remove();
             createCircle()
+            audioWaveUp.play()
         }
         if (waves.style.height == '230px') {
             gameOver()
+
         }
     }
 }
-setInterval(waterUp, 100);
+
+// вызывается ф-ия waterUp каждые 100млсек, (которая смотрит позицию капли, и если низ капли коснулся волны - капля исчезает)
+// const intervalKey = setInterval(waterUp, 100);
+const intervalPosition = setInterval(waterUp, 100);
 
 const gameOverGame = document.querySelector('.game-over-page');
 const rightAnswer = document.querySelector('.right-answer');
@@ -231,12 +247,15 @@ const scoreGame = document.querySelector('.game-score');
 console.log(gameOverGame)
 
 function gameOver() {
+    // clearInterval(intervalPosition); - очищает ф-ию setInterval(waterUp, 100); - чтобы она 
+    // не проверяла позицию капли и волны + чтобы отключился звук(когда волна поднимается)
+    clearInterval(intervalPosition);
     gamePage.style.display = 'none';
     gameOverGame.style.display = 'flex';
     rightAnswer.textContent = rightAnswer.textContent + trueResultCount;
     wrongAnswer.textContent = wrongAnswer.textContent + wrongResultCount;
     scoreGame.textContent += score.textContent;
     audioSea.pause();
-}
 
+}
 
