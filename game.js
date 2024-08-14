@@ -256,6 +256,11 @@ function gameOver() {
     wrongAnswer.textContent = wrongAnswer.textContent + wrongResultCount;
     scoreGame.textContent += score.textContent;
     audioSea.pause();
-
 }
 
+
+const btnRestart= document.querySelector('.btn-game-restart');
+btnRestart.addEventListener('click', gameRestart);
+function gameRestart() {
+    location.reload()  
+}
