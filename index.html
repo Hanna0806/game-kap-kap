@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <audio class="audio-sea" src="./music/382554fc10bf370.mp3" loop preload></audio>
+    <audio class="audio-kap" src="./music/multyashnyiy-zvuk-kapli.mp3" preload></audio>
+    <audio class="audio-mistake" src="./music/mistake.mp3" preload></audio>
+    <audio class="audio-vawe-up" src="./music/wave-up.mp3" preload></audio>
+
+    <section class="home-page">
+        <div class="home-page__container">
+            <button class="btn rules__btn"><span>How to play</span><img class="img-star" src="./img/star_77949 (1).svg"
+                    alt=""></button>
+            <button class="btn play__btn"><span>Play</span><img class="img-star" src="./img/star_77949 (1).svg"
+                    alt=""></button>
+        </div>
+    </section>
+
+    <section class="game-page">
+        <div class="game-page__container">
+
+            <div class="left-side">
+                <div class="game__container">
+                </div>
+                <div class="waves">
+                    <div class="wave1"></div>
+                </div>
+            </div>
+
+            <div class="right-side">
+                <div class="game-counter__container">
+                    <div class="game-counter">
+                        <img class="star-game" src="./img/star_77949 (1).svg" alt="">
+                    </div>
+                    <p>Score:</p>
+                    <p class="score">0</p>
+                </div>
+                <div class="calk__container">
+                    <div class="calk">
+                        <div class="item input">
+                            <form name="form" onsubmit="event.preventDefault();"><input class="input-calk" type="text"
+                                    name="textview"></form>
+                        </div>
+                        <div class="item number">7</div>
+                        <div class="item number">8</div>
+                        <div class="item number">9</div>
+                        <div class="item clear">Clear</div>
+                        <div class="item number">4</div>
+                        <div class="item number">5</div>
+                        <div class="item number">6</div>
+                        <div class="item number">1</div>
+                        <div class="item number">2</div>
+                        <div class="item number">3</div>
+                        <div class="item enter">Enter</div>
+                        <div class="item number zero">0</div>
+                        <div class="item delete">Delete</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="game-over-page">
+        <div class="game-over-page__container">
+            <div class="game-over-page__right-answer">
+                <p class="right-answer">Right answers: </p>
+            </div>
+            <div class="game-over-page__wrong-answer">
+                <p class="wrong-answer">Wrong answers: </p>
+            </div>
+            <div class="game-over-page__score">
+                <p class="game-score">Score: </p>
+            </div>
+            <button class="btn-game-restart">Play again</button>
+        </div>
+        
+    </section>
+
+    <script src="./game.js"></script>
+</body>
+
+</html>

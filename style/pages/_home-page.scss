@@ -1,0 +1,63 @@
+
+.home-page {
+
+    &__container {
+        background-image: url(/img/sea_first_page.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        min-height: 100vh;
+        padding: 50px;
+        gap: 10px;
+
+        .btn {
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            gap: 5px;
+            padding: 10px;
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+
+            .img-star {
+                width: 20px;
+                height: 20px;
+                transition: transform .5s ease;
+            }
+
+            &:hover {
+                filter: saturate(2);
+
+                .img-star {
+                    -webkit-transform: rotate(-50deg);
+                    transform: rotate(-50deg);
+                }
+            }
+        }
+
+        .rules__btn {
+            background-color: rgb(72, 0, 255);
+        }
+
+        .play__btn {
+            background-color: rgb(54, 163, 85);
+        }
+    }
+
+}
+
+// .btn:hover {
+//     filter: saturate(2);
+//     .img-star {
+//         -webkit-transform: rotate(-50deg);
+//         transform: rotate(-50deg);
+//         tansition: all .2s linear;
+//     }
+// }
